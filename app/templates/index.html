@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduGenie | AI Learning Assistant</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <header class="hero">
+            <div class="badge">AI-POWERED LEARNING</div>
+
+            <h1>Edu<span>Genie</span></h1>
+
+            <p>
+                Your intelligent learning companion for
+                understanding, practicing, and mastering concepts.
+            </p>
+        </header>
+
+
+        <main class="card">
+
+            <form action="/process" method="post">
+
+                <label for="task">What would you like to do?</label>
+
+                <select name="task" id="task" required>
+
+                    <option value="" disabled
+                        {% if not selected_task %}selected{% endif %}>
+                        Select a learning task
+                    </option>
+
+                    <option value="qa"
+                        {% if selected_task == "qa" %}selected{% endif %}>
+                        Ask a Question
+                    </option>
+
+                    <option value="explain"
+                        {% if selected_task == "explain" %}selected{% endif %}>
+                        Explain a Concept
+                    </option>
+
+                    <option value="quiz"
+                        {% if selected_task == "quiz" %}selected{% endif %}>
+                        Generate a Quiz
+                    </option>
+
+                    <option value="summarize"
+                        {% if selected_task == "summarize" %}selected{% endif %}>
+                        Summarize Text
+                    </option>
+
+                    <option value="learning"
+                        {% if selected_task == "learning" %}selected{% endif %}>
+                        Create Learning Path
+                    </option>
+
+                </select>
+
+
+                <label for="text">Enter your topic or content</label>
+
+                <textarea
+                    name="text"
+                    id="text"
+                    rows="8"
+                    placeholder="Ask a question, enter a topic, or paste educational content here..."
+                    required
+                >{{ user_text or "" }}</textarea>
+
+
+                <button type="submit">
+                    ✨ Generate with EduGenie
+                </button>
+
+            </form>
+
+
+            {% if result %}
+
+            <section class="result">
+
+                <div class="result-header">
+                    <span>EduGenie Response</span>
+                </div>
+
+                <div class="result-content">
+                    {{ result }}
+                </div>
+
+            </section>
+
+            {% endif %}
+
+        </main>
+
+
+        <footer>
+            <p>
+                EduGenie • Google Gemini Powered Learning Assistant
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
